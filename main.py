@@ -24,7 +24,6 @@ def isPicture(fileName):
 
 # Change desktop wallpaper
 def changeWallpaper(unused):
-    global previousWallpaper
     print("Changing Background")
     nextIndex = int(random() * 1000) % len(unused)
 
@@ -35,15 +34,16 @@ def changeWallpaper(unused):
     picture = str(unused[nextIndex])
     print(picture)
     run(["feh", "--bg-scale", picture])
-    previousWallpaper = str(unused[nextIndex])
+    runtime["previousWallpaper"] = str(unused[nextIndex])
     unused.pop(nextIndex)
     print("Sleeping")
-    sleep(10)
+    sleep(runtime["time"])
 
 # Handle Command Line Arguments
 def handleArguments():
     global runtime
     for i in range(1, len(argv)):
+        # Time should be specified in minutes
         if argv[i] == "-t":
             i += 1
             num = float(argv[i])
@@ -69,8 +69,9 @@ if __name__ == "__main__":
     for back in runtime["backgrounds"]:
         print(back)
 
-    unused = list(runtime["backgrounds"])
+    runtime["unused"] = list(runtime["backgrounds"])
 
+    # Main wallpaper switching logic done here
     while True:
         # Use random number modulo unused length to pick the first wallpaper
         # First check to ensure unused list is not empty
