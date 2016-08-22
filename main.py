@@ -21,10 +21,18 @@ def isPicture(fileName):
 
 # Change desktop wallpaper
 def changeWallpaper(unused):
+    global previousWallpaper
     print("Changing Background")
     nextIndex = int(random() * 1000) % len(unused)
+
+    # Check to make sure two wallpapers aren't displayed in a row
+    if previousWallpaper == str(unused[nextIndex]):
+        nextIndex = (nextIndex + 1) % len(unused)
+
     picture = str(unused[nextIndex])
+    print(picture)
     run(["feh", "--bg-scale", picture])
+    previousWallpaper = str(unused[nextIndex])
     unused.pop(nextIndex)
     print("Sleeping")
     sleep(10)
