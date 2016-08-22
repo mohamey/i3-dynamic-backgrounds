@@ -19,6 +19,16 @@ def isPicture(fileName):
 
     return False
 
+# Change desktop wallpaper
+def changeWallpaper(unused):
+    print("Changing Background")
+    nextIndex = int(random() * 1000) % len(unused)
+    picture = str(unused[nextIndex])
+    run(["feh", "--bg-scale", picture])
+    unused.pop(nextIndex)
+    print("Sleeping")
+    sleep(10)
+
 path = argv[1]
 print("Printing Image Directory")
 print(str(path))
@@ -42,11 +52,4 @@ while True:
     if len(unused) == 0:
         unused = list(backgrounds)
 
-    print("Changing Background")
-    nextIndex = int((random() * 1000)) % len(unused)
-    arg = str(unused[nextIndex])
-    print(arg)
-    run(["feh", "--bg-scale", arg])
-    unused.pop(nextIndex)
-    print("Sleeping")
-    sleep(10)
+    changeWallpaper(unused)
