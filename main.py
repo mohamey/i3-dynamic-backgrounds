@@ -4,6 +4,9 @@ from os import listdir
 from os.path import isfile, join, exists
 from sys import argv
 from random import random
+from tendo import singleton
+
+me = singleton.SingleInstance()
 
 runtime = {
     'backgrounds' : [],
