@@ -2,7 +2,7 @@ from time import sleep
 from subprocess import run
 from os import listdir
 from os.path import isfile, join, exists
-from sys import argv
+from sys import argv, exit
 from random import random
 from tendo import singleton
 
@@ -61,6 +61,8 @@ if __name__ == "__main__":
     handleArguments()
     for key in runtime:
         print(key + " - " + str(runtime[key]))
+    if runtime["path"] == "":
+        exit("A directory path must be specified")
     dirContents = listdir(runtime["path"])
 
     for fileName in dirContents:
