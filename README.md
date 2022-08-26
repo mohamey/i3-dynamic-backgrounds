@@ -8,13 +8,16 @@ This is a simple slideshow script for i3 tiling window manager written in Python
 
 ## Usage
 1. Clone the repo
-2. Install the requirements:
+
+2. make main.py executable by command
 ```
-pip3 install -r requirements.txt
+chmod u+x main.py
 ```
-3. Run the script
+otherwise i3 config won't exec it
+
+3. Run the script by placing below command in your i3 config
 ```
-./main.py -t 15 ~/Pictures/Wallpapers
+exec your-path-to-the-folder/i3-dynamic-backgrounds/main.py -t 15 ~/Pictures/wallpapers/
 ```
 The above command checks the directory Wallpapers for pictures, and shuffles the desktop background to change to a picture in the directory every 15 mins.
 
